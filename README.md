@@ -10,7 +10,7 @@ Add the keybinding to `keybindings.json`, then in your project make the .vscode 
 
 ```
 [ -d ".vscode" ] || mkdir ".vscode"
-SOURCE="https://gist.githubusercontent.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f/raw/2a1de7e14c654f48c1cdfd8ab50fe00d067c0024/run.sh"
+SOURCE="https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh"
 curl $SOURCE > .vscode/run.sh
 chmod u+x ./.vscode/run.sh
 ```
@@ -18,7 +18,7 @@ chmod u+x ./.vscode/run.sh
 ## one-liner
 
 ```
-[ -d ".vscode" ] || mkdir ".vscode"; curl https://gist.githubusercontent.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f/raw/2a1de7e14c654f48c1cdfd8ab50fe00d067c0024/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
+[ -d ".vscode" ] || mkdir ".vscode"; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
 ```
 
 ## test
@@ -27,7 +27,7 @@ chmod u+x ./.vscode/run.sh
 cd ~
 mkdir test
 cd test
-[ -d ".vscode" ] || mkdir ".vscode"; curl https://gist.githubusercontent.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f/raw/2a1de7e14c654f48c1cdfd8ab50fe00d067c0024/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
+[ -d ".vscode" ] || mkdir ".vscode"; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
 touch hi.txt
 code hi.txt
 ```
@@ -47,7 +47,8 @@ EXTENSION  : sh  # just the extension of the current file
 ROOTFOLDER : <same as FILEFOLDER>
 ```
 
-## todos
+# todos
 
-- [ ] automatically update links on push
-- [ ] one-liner to update to a new version (diff with one from /stable/)
+- [ ] ? run.fish / run.zsh
+- [ ] ? script which automatically adds keyboard shortcut to keybindings.json
+- [ ] ? find a workaround for something already running in the terminal (e.g. python/julia repl)

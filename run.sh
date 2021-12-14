@@ -1,5 +1,7 @@
-# https://gist.github.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f
-# Example .run.sh
+# https://github.com/MarcinKonowalczyk/run_sh
+# Bash script run by a keboard shortcut, called with rteh current file path $1
+# This is intended as an exmaple, but also contains a bunch of useful path partitions
+# Feel free to delete everything in 
 echo "Hello from run script! ^_^"
 
 # The direcotry of the main project from which this script is running
@@ -22,10 +24,7 @@ ROOTFOLDER="${1##*$ROOT/}" && ROOTFOLDER="${ROOTFOLDER%%/*}" # folder in the roo
 # Echo of path variables
 # VERBOSE=true
 VERBOSE=false
-
-if [ "$FILEFOLDER" = ".vscode" ] && [ "$FILENAME" = "run.sh" ]; then
-    VERBOSE=true
-fi
+[ "$FILEFOLDER" = ".vscode" ] && [ "$FILENAME" = "run.sh" ] && VERBOSE=true
 
 if $VERBOSE; then
     # https://stackoverflow.com/a/5947802/2531987
