@@ -20,7 +20,13 @@ ROOTFOLDER="${1##*$ROOT/}" && ROOTFOLDER="${ROOTFOLDER%%/*}" # folder in the roo
 [ $ROOTFOLDER != $FILENAME ] || ROOTFOLDER=""
 
 # Echo of path variables
-VERBOSE=true
+# VERBOSE=true
+VERBOSE=false
+
+if [ "$FILEFOLDER" = ".vscode" ] && [ "$FILENAME" = "run.sh" ]; then
+    VERBOSE=true
+fi
+
 if $VERBOSE; then
     # https://stackoverflow.com/a/5947802/2531987
     GREEN='\033[0;32m'; YELLOW='\033[0;33m'; RED='\033[0;31m'; NC='\033[0m'
