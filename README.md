@@ -2,7 +2,7 @@
 
 Vscode keybinding script to run .vscode/run.sh in bash, passing the current file as an input. This started as a vscode hack/joke but I ended up finding this *unreasonably* useful.
 
-Originally posted on (gist)[https://gist.github.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f].
+Originally posted on [gist](https://gist.github.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f).
 
 ## instructions
 
