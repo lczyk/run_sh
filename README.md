@@ -44,3 +44,7 @@ FILEFOLDER : .vscode  # folder in which the current file is located
 EXTENSION  : sh  # just the extension of the current file
 ROOTFOLDER : <same as FILEFOLDER>
 ```
+
+## todos
+
+- [ ] automatically update links on push
