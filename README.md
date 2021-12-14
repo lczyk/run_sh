@@ -1,10 +1,12 @@
 # run.sh
 
-Vscode keybinding script to run .vscode/run.sh in bash, passing the current file as an input.
+Vscode keybinding script to run .vscode/run.sh in bash, passing the current file as an input. This started as a vscode hack/joke but I ended up finding this *unreasonably* useful.
+
+Originally posted on (gist)[https://gist.github.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f].
 
 ## instructions
 
-Add the keybinding to `keybindings.json`, then in your project make the .vscode folder (if there isnt one there already and add `run.sh` file to it). It will be run each time you press the keybinding `shift+enter` with an editor focus.
+Add the keybinding to `keybindings.json`, then in your project make the .vscode folder (if there isn't one there already and add `run.sh` file to it). It will be run each time you press the keybinding `shift+enter` with an editor focus.
 
 ```
 [ -d ".vscode" ] || mkdir ".vscode"
@@ -48,3 +50,4 @@ ROOTFOLDER : <same as FILEFOLDER>
 ## todos
 
 - [ ] automatically update links on push
+- [ ] one-liner to update to a new version (diff with one from /stable/)
