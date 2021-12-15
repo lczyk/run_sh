@@ -1,7 +1,8 @@
 # https://github.com/MarcinKonowalczyk/run_sh
 # Bash script run by a keboard shortcut, called with rteh current file path $1
 # This is intended as an exmaple, but also contains a bunch of useful path partitions
-# Feel free to delete everything in 
+# Feel free to delete everything in here and make it do wahtever you want.
+
 echo "Hello from run script! ^_^"
 
 # The direcotry of the main project from which this script is running
@@ -29,6 +30,25 @@ VERBOSE=false
 if $VERBOSE; then
     # https://stackoverflow.com/a/5947802/2531987
     GREEN='\033[0;32m'; YELLOW='\033[0;33m'; RED='\033[0;31m'; NC='\033[0m'
+
+    LOGO=true
+    if $LOGO; then
+        PURPLE='\033[0;34m'; DARKGRAY='\033[1;30m';
+        TEXT=(
+            " ______   __  __   __   __ " "    " "    ______   __  __   "
+            "/\\  == \\ /\\ \\/\\ \\ /\\ \"-.\\ \\ " "    " "  /\\  ___\\ /\\ \\_\\ \\  "
+            "\\ \\  __< \\ \\ \\_\\ \\\\\\ \\ \\-.  \\ " "  __" " \\ \\___  \\\\\\ \\  __ \\ "
+            " \\ \\_\\ \\_\\\\\\ \\_____\\\\\\ \\_\\\\\\\"\\_\\ " "/\\_\\\\" " \\/\\_____\\\\\\ \\_\\ \\_\\\\"
+            "  \\/_/ /_/ \\/_____/ \\/_/ \\/_/ " "\\/_/" "  \\/_____/ \\/_/\\/_/"
+        )
+        echo -e "$PURPLE${TEXT[0]}$DARKGRAY${TEXT[1]}$PURPLE${TEXT[2]}$NC"
+        echo -e "$PURPLE${TEXT[3]}$DARKGRAY${TEXT[4]}$PURPLE${TEXT[5]}$NC"
+        echo -e "$PURPLE${TEXT[6]}$DARKGRAY${TEXT[7]}$PURPLE${TEXT[8]}$NC"
+        echo -e "$PURPLE${TEXT[9]}$DARKGRAY${TEXT[10]}$PURPLE${TEXT[11]}$NC"
+        echo -e "$PURPLE${TEXT[12]}$DARKGRAY${TEXT[13]}$PURPLE${TEXT[14]}$NC"
+        echo -e ""
+    fi
+
     echo -e "ROOT       : $GREEN${ROOT}$NC  # root directory of the project"
     echo -e "NAME       : $GREEN${NAME}$NC  # project name"
     echo -e "PWD        : $GREEN${PWD}$NC  # pwd"
