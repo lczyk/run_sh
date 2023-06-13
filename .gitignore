@@ -1,3 +1,4 @@
 # Dont include an instance of self in the .vscode folder
 # That would be a bit silly
 .vscode
+.cspellcache
