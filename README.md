@@ -33,7 +33,7 @@ Add the following keybinding to your `keybindings.json`:
 
 Then in your project make the .vscode folder (if there isn't one there already and add `run.sh` file to it). It will be run each time you press the keybinding `shift+enter` with an editor focus.
 
-```
+```sh
 [ -d ".vscode" ] || mkdir ".vscode"
 SOURCE="https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh"
 curl $SOURCE > .vscode/run.sh
@@ -42,13 +42,13 @@ chmod u+x ./.vscode/run.sh
 
 ## One-liner
 
-```
+```sh
 [ -d ".vscode" ] || mkdir ".vscode"; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
 ```
 
 ## Test
 
-```
+```sh
 cd ~
 mkdir test
 cd test
