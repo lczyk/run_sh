@@ -36,15 +36,36 @@ Then in your project make the .vscode folder (if there isn't one there already a
 ```sh
 [ -d ".vscode" ] || mkdir ".vscode"
 SOURCE="https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh"
-curl $SOURCE > .vscode/run.sh
-chmod u+x ./.vscode/run.sh
+TARGET=".vscode/run.sh"
+[ -f "$TARGET" ] && mv $TARGET $TARGET~
+curl $SOURCE > $TARGET
+chmod u+x $TARGET
 ```
 
-## One-liner
+## One-liners
 
 ```sh
-[ -d ".vscode" ] || mkdir ".vscode"; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
+[ -d .vscode ] || mkdir .vscode; [ -f .vscode/run.sh ] && mv .vscode/run.sh .vscode/run.sh~; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x .vscode/run.sh;
 ```
+
+Or set it as an alias in bash/zsh in (`~/.bashrc` / `~/.zshrc`):
+
+```sh
+alias runsh="[ -d .vscode ] || mkdir .vscode; [ -f .vscode/run.sh ] && mv .vscode/run.sh .vscode/run.sh~; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x .vscode/run.sh;"
+```
+
+or in `~/.config/fish/config.fish`:
+
+```sh
+# alias for downloading run.sh
+functions --erase runsh
+function runsh
+    [ -d .vscode ] || mkdir .vscode;
+    [ -f .vscode/run.sh ] && mv .vscode/run.sh .vscode/run.sh~;
+    curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x .vscode/run.sh;
+end
+```
+
 
 ## Test
 
