@@ -5,7 +5,7 @@
 FILE="$0";
 
 # The directory of this file (expanded.sh).
-# In keyboding this is the dirname of the $FILE
+# In keybinding this is the dirname of the $FILE
 PWD=$(pwd);
 
 # script file to search for
@@ -14,7 +14,7 @@ SCRIPT=".vscode/run.sh";
 # Echo to see what's up
 echo "FILE = $FILE";
 echo "PWD = $PWD";
-echo "SCRIPT = $SCTIPT";
+echo "SCRIPT = $SCRIPT";
 
 while :; do
     RUN="$PWD/$SCRIPT";

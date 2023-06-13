@@ -8,11 +8,11 @@
   \/_/ /_/ \/_____/ \/_/ \/_/ \/_/  \/_____/ \/_/\/_/
 ```
 
-vscode keybinding script to run .vscode/run.sh in bash, passing the current file as an input. This started as a vscode hack/joke but I ended up finding this *unreasonably* useful.
+vscode keybindings script to run .vscode/run.sh in bash, passing the current file as an input. This started as a vscode hack/joke but I ended up finding this *unreasonably* useful.
 
 Originally posted on [gist](https://gist.github.com/MarcinKonowalczyk/709e93f08e9d72f8092acd5b8d34c81f).
 
-## instructions
+## Instructions
 
 Add the following keybinding to your `keybindings.json`:
 
@@ -40,13 +40,13 @@ curl $SOURCE > .vscode/run.sh
 chmod u+x ./.vscode/run.sh
 ```
 
-## one-liner
+## One-liner
 
 ```
 [ -d ".vscode" ] || mkdir ".vscode"; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x ./.vscode/run.sh
 ```
 
-## test
+## Test
 
 ```
 cd ~
@@ -67,12 +67,12 @@ PWD        : /Users/marcinkonowalczyk/test  # pwd
 FILE       : /Users/marcinkonowalczyk/test/.vscode/run.sh # full file information
 FILENAME   : run.sh  # current filename
 FILEPATH   : /Users/marcinkonowalczyk/test/.vscode  # path of the current file
-FILEFOLDER : .vscode  # folder in which the current file is located
+FILE_FOLDER : .vscode  # folder in which the current file is located
 EXTENSION  : sh  # just the extension of the current file
-ROOTFOLDER : <same as FILEFOLDER>
+ROOT_FOLDER : <same as FILE_FOLDER>
 ```
 
-# todos
+# ToDo's
 
 - [ ] ? run.fish / run.zsh
 - [ ] ? script which automatically adds keyboard shortcut to keybindings.json
