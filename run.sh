@@ -9,9 +9,9 @@ _VERSION="0.0.1" # Version of this script
 
 # The directory of the main project from which this script is running
 # https://stackoverflow.com/a/246128/2531987
-ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT="${ROOT%/*}" # Strip .vscode folder
-NAME="${ROOT##*/}" # Project name
+ROOT_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT_FOLDER="${ROOT_FOLDER%/*}" # Strip .vscode folder
+NAME="${ROOT_FOLDER##*/}" # Project name
 PWD=$(pwd);
 
 # Extension, filename and directory parts of the file which triggered this
@@ -21,8 +21,6 @@ FILENAME="${FILE##*/}" # Filename with extension
 FILEPATH="${FILE%/*}" # Path of the current file
 FILE_FOLDER="${FILEPATH##*/}" # Folder in which the current file is located (could be e.g. a nested subdirectory)
 EXTENSION="${FILENAME##*.}" # Just the extension
-ROOT_FOLDER="${1##*$ROOT/}" && ROOT_FOLDER="${ROOT_FOLDER%%/*}" # folder in the root directory (not necessarily the same as FILE_FOLDER)
-[ $ROOT_FOLDER != $FILENAME ] || ROOT_FOLDER=""
 
 # Echo of path variables
 # VERBOSE=true
@@ -51,23 +49,14 @@ if $VERBOSE; then
         echo -e ""
     fi
 
-    echo -e "ROOT       : $GREEN${ROOT}$NC  # root directory of the project"
-    echo -e "NAME       : $GREEN${NAME}$NC  # project name"
-    echo -e "PWD        : $GREEN${PWD}$NC  # pwd"
-    echo -e "FILE       : $GREEN${FILE}$NC # full file information"
-    echo -e "FILENAME   : $GREEN${FILENAME}$NC  # current filename"
-    echo -e "FILEPATH   : $GREEN${FILEPATH}$NC  # path of the current file"
+    echo -e "ROOT_FOLDER : $GREEN${ROOT_FOLDER}$NC  # root directory of the project"
+    echo -e "PWD         : $GREEN${PWD}$NC  # pwd"
+    echo -e "NAME        : $GREEN${NAME}$NC  # project name"
+    echo -e "FILE        : $GREEN${FILE}$NC  # full file information"
+    echo -e "FILENAME    : $GREEN${FILENAME}$NC  # current filename"
+    echo -e "FILEPATH    : $GREEN${FILEPATH}$NC  # path of the current file"
     echo -e "FILE_FOLDER : $GREEN${FILE_FOLDER}$NC  # folder in which the current file is located"
-    echo -e "EXTENSION  : $GREEN${EXTENSION}$NC  # just the extension of the current file"
-    if [ $ROOT_FOLDER ]; then
-        if [ $ROOT_FOLDER != $FILE_FOLDER ]; then
-            echo -e "ROOT_FOLDER : $GREEN${ROOT_FOLDER}$NC # folder in the root directory"
-        else
-            echo -e "ROOT_FOLDER : ${YELLOW}<same as FILE_FOLDER>${NC}"
-        fi
-    else
-        echo -e "ROOT_FOLDER : ${YELLOW}<file in ROOT>${NC}"
-    fi
+    echo -e "EXTENSION   : $GREEN${EXTENSION}$NC  # just the extension of the current file"
 fi
 
 ##################################################
