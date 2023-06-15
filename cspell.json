@@ -6,6 +6,9 @@
         "keybinding",
         "marcinkonowalczyk",
         "runsh",
-        "pytest",
+        "pytest"
+    ],
+    "enableFiletypes": [
+        "shellscript"
     ]
 }
