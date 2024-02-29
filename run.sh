@@ -5,7 +5,7 @@
 
 echo "Hello from run script! ^_^"
 
-_VERSION="0.2" # Version of this script
+_VERSION="0.2.1" # Version of this script
 
 # The directory of the main project from which this script is running
 # https://stackoverflow.com/a/246128/2531987
