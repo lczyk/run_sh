@@ -9,8 +9,8 @@ _VERSION="0.2" # Version of this script
 
 # The directory of the main project from which this script is running
 # https://stackoverflow.com/a/246128/2531987
-ROOT_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_FOLDER="${ROOT_FOLDER%/*}" # Strip .vscode folder
+ROOT_FOLDER="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+ROOT_FOLDER="${ROOT_FOLDER%/*}"   # Strip .vscode folder
 PROJECT_NAME="${ROOT_FOLDER##*/}" # Project name
 
 FULL_FILE_PATH="$1"
@@ -19,7 +19,7 @@ _RELATIVE_FILE_PATH="${FULL_FILE_PATH##*$ROOT_FOLDER/}" # Relative path of the c
 # Split the relative file path into an array
 RELATIVE_PATH_PARTS=(${_RELATIVE_FILE_PATH//\// })
 DEPTH=${#RELATIVE_PATH_PARTS[@]}
-DEPTH=$((DEPTH-1))
+DEPTH=$((DEPTH - 1))
 
 # Couple of useful variables
 FILENAME="${RELATIVE_PATH_PARTS[$DEPTH]}"
@@ -29,7 +29,12 @@ EXTENSION="" && [[ "$FILENAME" == *.* ]] && EXTENSION="${FILENAME##*.}"
 
 ########################################
 
-GREEN='\033[0;32m'; YELLOW='\033[0;33m'; RED='\033[0;31m'; NC='\033[0m'; PURPLE='\033[0;34m'; DARK_GRAY='\033[1;30m';
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+PURPLE='\033[0;34m'
+DARK_GRAY='\033[1;30m'
 
 function logo() {
     TEXT=(
@@ -57,11 +62,13 @@ function info() {
     echo -e "FULL_FILE_PATH      : $GREEN${FULL_FILE_PATH}$NC  # full path of the current file"
 }
 
-
 # VERBOSE=true
 VERBOSE=false
 [ "${RELATIVE_PATH_PARTS[0]}" = ".vscode" ] && [ ${RELATIVE_PATH_PARTS[$DEPTH]} = "run.sh" ] && [ $DEPTH -eq 1 ] && VERBOSE=true
-if $VERBOSE; then logo; info; fi
+if $VERBOSE; then
+    logo
+    info
+fi
 
 ########################################
 
@@ -69,13 +76,12 @@ if $VERBOSE; then logo; info; fi
 
 # Run the makefile if you're currently editing the makefile
 if [ "$FILENAME" = "makefile" ]; then
-    echo "About to run the makefile!";
-    make;
+    echo "About to run the makefile!"
+    make
 fi
 
 # Run the test if you're currently editing a python test file
 if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
-    echo "Running tests for $FILENAME";
+    echo "Running tests for $FILENAME"
     pytest -s -x -k ${FILENAME%.*}
 fi
-
