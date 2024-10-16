@@ -30,12 +30,7 @@ EXTENSION="" && [[ "$FILENAME" == *.* ]] && EXTENSION="${FILENAME##*.}"
 
 ########################################
 
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-RED='\033[0;31m'
-NC='\033[0m'
-PURPLE='\033[0;34m'
-DARK_GRAY='\033[1;30m'
+GREEN='\033[0;32m';YELLOW='\033[0;33m';RED='\033[0;31m';PURPLE='\033[0;34m';DARK_GRAY='\033[1;30m';NC='\033[0m';
 
 function logo() {
     TEXT=(
