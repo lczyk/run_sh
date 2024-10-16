@@ -75,10 +75,19 @@ fi
 if [ "$FILENAME" = "makefile" ]; then
     echo "About to run the makefile!"
     make
+    exit 0
 fi
 
 # Run the test if you're currently editing a python test file
 if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
     echo "Running tests for $FILENAME"
     pytest -s -x -k ${FILENAME%.*}
+    exit 0
 fi
+
+
+########################################
+
+# Got to the end of the script. I guess there's nothing to do.
+
+echo -e "Nothing to do for $GREEN${FULL_FILE_PATH}$NC"
