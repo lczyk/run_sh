@@ -69,6 +69,7 @@ VERBOSE=false
 if $VERBOSE; then
     logo
     info
+    exit 0
 fi
 
 ########################################
