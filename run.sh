@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # https://github.com/MarcinKonowalczyk/run_sh
 # Bash script run by a keyboard shortcut, called with the current file path $1
 # This is intended as an example, but also contains a bunch of useful path partitions
