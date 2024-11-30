@@ -67,26 +67,62 @@ if $VERBOSE; then
     exit 0
 fi
 
-########################################
+################################################################################
 
 # Do some other stuff here.
 
-# Run the makefile if you're currently editing the makefile
-if [ "$FILENAME" = "makefile" ]; then
-    echo "About to run the makefile!"
-    make
-    exit 0
+_EXAMPLE_MAKEFILE=false
+if [ "$_EXAMPLE_MAKEFILE" = true ]; then
+    # Run the makefile if you're currently editing the makefile
+    if [ "$FILENAME" = "makefile" ]; then
+        echo "About to run the makefile!"
+        make
+        exit 0
+    fi
 fi
 
-# Run the test if you're currently editing a python test file
-if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
-    echo "Running tests for $FILENAME"
-    pytest -s -x -k ${FILENAME%.*}
-    exit 0
+_EXAMPLE_PYTEST=false
+if [ "$_EXAMPLE_PYTEST" = true ]; then
+    # Run the test if you're currently editing a python test file
+    if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
+        echo "Running tests for $FILENAME"
+        pytest -s -x -k ${FILENAME%.*}
+        exit 0
+    fi
 fi
 
 
-########################################
+_EXAMPLE_CMAKE=false
+if [ "$_EXAMPLE_CMAKE" = true ]; then
+    
+    TARGET="goo" # cmake target
+    
+    if [ ! -d "$ROOT_FOLDER/build" ]; then
+        # If the build folder doesn't exist, create it and run cmake
+        (
+            mkdir "$ROOT_FOLDER/build"
+            cd "$ROOT_FOLDER/build"
+            cmake ..
+        )
+    fi
+
+    make --directory="$ROOT_FOLDER/build/"; OUT=$?;
+    if [ $OUT == 0 ]; then
+        echo "Running $TARGET";
+        "$ROOT_FOLDER/build/$TARGET"; OUT=$?;
+        if [ $OUT == 0 ]; then
+            echo "Success!";
+        else
+            echo "$TARGET failed with $OUT";
+        fi
+    else
+        echo "make failed with $OUT";
+        echo "maybe delete the content of the build folder, rerun cmake and try again?";
+    fi
+    exit $OUT
+fi
+
+################################################################################
 
 # Got to the end of the script. I guess there's nothing to do.
 
