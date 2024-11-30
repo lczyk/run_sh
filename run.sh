@@ -4,9 +4,9 @@
 # This is intended as an example, but also contains a bunch of useful path partitions
 # Feel free to delete everything in here and make it do whatever you want.
 
-echo "Hello from run script! ^_^"
+printf "Hello from run script! ^_^"
 
-_VERSION="0.2.2" # Version of this script
+_VERSION="0.2.3" # Version of this script
 
 # The directory of the main project from which this script is running
 # https://stackoverflow.com/a/246128/2531987
@@ -37,25 +37,25 @@ function logo() {
         " ______   __  __   __   __ " "    " "    ______   __  __   "
         "/\\  == \\ /\\ \\/\\ \\ /\\ \"-.\\ \\ " "    " "  /\\  ___\\ /\\ \\_\\ \\  "
         "\\ \\  __< \\ \\ \\_\\ \\\\\\ \\ \\-.  \\ " "  __" " \\ \\___  \\\\\\ \\  __ \\ "
-        " \\ \\_\\ \\_\\\\\\ \\_____\\\\\\ \\_\\\\\\\"\\_\\ " "/\\_\\\\" " \\/\\_____\\\\\\ \\_\\ \\_\\\\"
+        " \\ \\_\\ \\_\\\\\\ \\_____\\\\\\ \\_\\\\ \\\"\\_\\ " "/\\_\\\\" " \\/\\_____\\\\\\ \\_\\ \\_\\\\"
         "  \\/_/ /_/ \\/_____/ \\/_/ \\/_/ " "\\/_/" "  \\/_____/ \\/_/\\/_/"
     )
-    echo -e "$PURPLE${TEXT[0]}$DARK_GRAY${TEXT[1]}$PURPLE${TEXT[2]}$NC"
-    echo -e "$PURPLE${TEXT[3]}$DARK_GRAY${TEXT[4]}$PURPLE${TEXT[5]}$NC"
-    echo -e "$PURPLE${TEXT[6]}$DARK_GRAY${TEXT[7]}$PURPLE${TEXT[8]}$NC"
-    echo -e "$PURPLE${TEXT[9]}$DARK_GRAY${TEXT[10]}$PURPLE${TEXT[11]}$NC"
-    echo -e "$PURPLE${TEXT[12]}$DARK_GRAY${TEXT[13]}$PURPLE${TEXT[14]} ${DARK_GRAY}v${_VERSION}$NC"
-    echo ""
+    printf "$PURPLE${TEXT[0]}$DARK_GRAY${TEXT[1]}$PURPLE${TEXT[2]}$NC\n"
+    printf "$PURPLE${TEXT[3]}$DARK_GRAY${TEXT[4]}$PURPLE${TEXT[5]}$NC\n"
+    printf "$PURPLE${TEXT[6]}$DARK_GRAY${TEXT[7]}$PURPLE${TEXT[8]}$NC\n"
+    printf "$PURPLE${TEXT[9]}$DARK_GRAY${TEXT[10]}$PURPLE${TEXT[11]}$NC\n"
+    printf "$PURPLE${TEXT[12]}$DARK_GRAY${TEXT[13]}$PURPLE${TEXT[14]} ${DARK_GRAY}v${_VERSION}$NC\n"
+    printf "\n"
 }
 
 function info() {
-    echo -e "PROJECT_NAME        : $GREEN${PROJECT_NAME}$NC  # project name (name of the project folder)"
-    echo -e "RELATIVE_PATH_PARTS : $GREEN${RELATIVE_PATH_PARTS[@]}$NC  # relative path of the current file split into an array"
-    echo -e "DEPTH               : $GREEN${DEPTH}$NC  # depth of the current file (number of folders deep)"
-    echo -e "FILENAME            : $GREEN${FILENAME}$NC  # just the filename (equivalent to RELATIVE_PATH_PARTS[DEPTH])"
-    echo -e "EXTENSION           : $GREEN${EXTENSION}$NC  # just the extension of the current file"
-    echo -e "ROOT_FOLDER         : $GREEN${ROOT_FOLDER}$NC  # full path to the root folder of the project"
-    echo -e "FULL_FILE_PATH      : $GREEN${FULL_FILE_PATH}$NC  # full path of the current file"
+    printf "PROJECT_NAME        : $GREEN${PROJECT_NAME}$NC  # project name (name of the project folder)\n"
+    printf "RELATIVE_PATH_PARTS : $GREEN${RELATIVE_PATH_PARTS[@]}$NC  # relative path of the current file split into an array\n"
+    printf "DEPTH               : $GREEN${DEPTH}$NC  # depth of the current file (number of folders deep)\n"
+    printf "FILENAME            : $GREEN${FILENAME}$NC  # just the filename (equivalent to RELATIVE_PATH_PARTS[DEPTH])\n"
+    printf "EXTENSION           : $GREEN${EXTENSION}$NC  # just the extension of the current file\n"
+    printf "ROOT_FOLDER         : $GREEN${ROOT_FOLDER}$NC  # full path to the root folder of the project\n"
+    printf "FULL_FILE_PATH      : $GREEN${FULL_FILE_PATH}$NC  # full path of the current file\n"
 }
 
 # VERBOSE=true
@@ -75,7 +75,7 @@ _EXAMPLE_MAKEFILE=false
 if [ "$_EXAMPLE_MAKEFILE" = true ]; then
     # Run the makefile if you're currently editing the makefile
     if [ "$FILENAME" = "makefile" ]; then
-        echo "About to run the makefile!"
+        printf "About to run the makefile!\n"
         make
         exit 0
     fi
@@ -85,7 +85,7 @@ _EXAMPLE_PYTEST=false
 if [ "$_EXAMPLE_PYTEST" = true ]; then
     # Run the test if you're currently editing a python test file
     if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
-        echo "Running tests for $FILENAME"
+        printf "Running tests for $FILENAME\n"
         pytest -s -x -k ${FILENAME%.*}
         exit 0
     fi
@@ -108,16 +108,16 @@ if [ "$_EXAMPLE_CMAKE" = true ]; then
 
     make --directory="$ROOT_FOLDER/build/"; OUT=$?;
     if [ $OUT == 0 ]; then
-        echo "Running $TARGET";
+        printf "Running $TARGET\n";
         "$ROOT_FOLDER/build/$TARGET"; OUT=$?;
         if [ $OUT == 0 ]; then
-            echo "Success!";
+            printf "Success!\n";
         else
-            echo "$TARGET failed with $OUT";
+            printf "$TARGET failed with $OUT\n";
         fi
     else
-        echo "make failed with $OUT";
-        echo "maybe delete the content of the build folder, rerun cmake and try again?";
+        printf "make failed with $OUT\n";
+        printf "maybe delete the content of the build folder, rerun cmake and try again?\n";
     fi
     exit $OUT
 fi
@@ -126,4 +126,4 @@ fi
 
 # Got to the end of the script. I guess there's nothing to do.
 
-echo -e "Nothing to do for $GREEN${FULL_FILE_PATH}$NC"
+printf "Nothing to do for $GREEN${FULL_FILE_PATH}$NC\n"
