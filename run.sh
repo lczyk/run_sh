@@ -4,7 +4,7 @@
 # This is intended as an example, but also contains a bunch of useful path partitions
 # Feel free to delete everything in here and make it do whatever you want.
 
-printf "Hello from run script! ^_^"
+printf "Hello from run script! ^_^\n"
 
 _VERSION="0.2.3" # Version of this script
 
