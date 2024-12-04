@@ -44,11 +44,13 @@ chmod u+x $TARGET
 
 ## One-liners
 
+Make a .vscode folder in the current directory (aka your project) and download the latest run.sh script from `MarcinKonowalczyk/run_sh/master`. If a run.sh script already existed, back it up to run.sh~. This is useful if you already wrote a bunch of behaviours and you don't wanna accidentally overwrite them.
+
 ```sh
 [ -d .vscode ] || mkdir .vscode; [ -f .vscode/run.sh ] && mv .vscode/run.sh .vscode/run.sh~; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x .vscode/run.sh;
 ```
 
-Or set it as an alias in bash/zsh in (`~/.bashrc` / `~/.zshrc`):
+If you do this often, you can set it up as an alias. For bash/zsh (in `~/.bashrc` / `~/.zshrc`):
 
 ```sh
 alias runsh="[ -d .vscode ] || mkdir .vscode; [ -f .vscode/run.sh ] && mv .vscode/run.sh .vscode/run.sh~; curl https://raw.githubusercontent.com/MarcinKonowalczyk/run_sh/master/run.sh > .vscode/run.sh && chmod u+x .vscode/run.sh;"
@@ -99,4 +101,4 @@ ROOT_FOLDER : <same as FILE_FOLDER>
 - [ ] ? script which automatically adds keyboard shortcut to keybindings.json
 - [ ] ? find a workaround for something already running in the terminal (e.g. python/julia repl)
 - [x] ? logo screenshot / comment block?
-- [ ] Rework the default `run.sh` script. Make the variables to have slightly more descriptive names.
+- [x] Rework the default `run.sh` script. Make the variables to have slightly more descriptive names.
