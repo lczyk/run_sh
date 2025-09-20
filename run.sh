@@ -50,7 +50,7 @@ function logo() {
 
 function info() {
     printf "PROJECT_NAME        : $GREEN${PROJECT_NAME}$NC  # project name (name of the project folder)\n"
-    printf "RELATIVE_PATH_PARTS : $GREEN${RELATIVE_PATH_PARTS[@]}$NC  # relative path of the current file split into an array\n"
+    printf "RELATIVE_PATH_PARTS : $GREEN${RELATIVE_PATH_PARTS[*]}$NC  # relative path of the current file split into an array\n"
     printf "DEPTH               : $GREEN${DEPTH}$NC  # depth of the current file (number of folders deep)\n"
     printf "FILENAME            : $GREEN${FILENAME}$NC  # just the filename (equivalent to RELATIVE_PATH_PARTS[DEPTH])\n"
     printf "EXTENSION           : $GREEN${EXTENSION}$NC  # just the extension of the current file\n"
