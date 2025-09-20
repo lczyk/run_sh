@@ -6,7 +6,10 @@
 
 printf "Hello from run script! ^_^\n"
 
-_VERSION="0.2.3" # Version of this script
+# spellchecker: ignore Marcin Konowalczyk lczyk
+__VERSION__="0.2.4"
+__AUTHOR__="Marcin Konowalczyk @lczyk"
+__LICENSE__="MIY-0"
 
 # The directory of the main project from which this script is running
 # https://stackoverflow.com/a/246128/2531987
