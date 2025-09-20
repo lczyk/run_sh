@@ -18,7 +18,8 @@ FULL_FILE_PATH="$1"
 _RELATIVE_FILE_PATH="${FULL_FILE_PATH##*"$ROOT_FOLDER"/}" # Relative path of the current file
 
 # Split the relative file path into an array
-RELATIVE_PATH_PARTS=("${_RELATIVE_FILE_PATH//\// }")
+# shellcheck disable=SC2206
+RELATIVE_PATH_PARTS=(${_RELATIVE_FILE_PATH//\// })
 DEPTH=${#RELATIVE_PATH_PARTS[@]}
 DEPTH=$((DEPTH - 1))
 
