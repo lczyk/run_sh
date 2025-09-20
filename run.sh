@@ -15,10 +15,10 @@ ROOT_FOLDER="${ROOT_FOLDER%/*}"   # Strip .vscode folder
 PROJECT_NAME="${ROOT_FOLDER##*/}" # Project name
 
 FULL_FILE_PATH="$1"
-_RELATIVE_FILE_PATH="${FULL_FILE_PATH##*$ROOT_FOLDER/}" # Relative path of the current file
+_RELATIVE_FILE_PATH="${FULL_FILE_PATH##*"$ROOT_FOLDER"/}" # Relative path of the current file
 
 # Split the relative file path into an array
-RELATIVE_PATH_PARTS=(${_RELATIVE_FILE_PATH//\// })
+RELATIVE_PATH_PARTS=("${_RELATIVE_FILE_PATH//\// }")
 DEPTH=${#RELATIVE_PATH_PARTS[@]}
 DEPTH=$((DEPTH - 1))
 
