@@ -37,37 +37,40 @@ function logo() {
     TEXT=(
         " ______   __  __   __   __ " "    " "    ______   __  __   "
         "/\\  == \\ /\\ \\/\\ \\ /\\ \"-.\\ \\ " "    " "  /\\  ___\\ /\\ \\_\\ \\  "
-        "\\ \\  __< \\ \\ \\_\\ \\\\\\ \\ \\-.  \\ " "  __" " \\ \\___  \\\\\\ \\  __ \\ "
-        " \\ \\_\\ \\_\\\\\\ \\_____\\\\\\ \\_\\\\ \\\"\\_\\ " "/\\_\\\\" " \\/\\_____\\\\\\ \\_\\ \\_\\\\"
+        "\\ \\  __< \\ \\ \\_\\ \\\\\\ \\ \\-. \\ " "  __" " \\ \\___ \\\\\\ \\  __ \\ "
+        " \\ \\_\\ \\_\\\\ \\_____\\\\ \\_\\ \"\\_\\ " "/\\_\\" " \\/\\_____\\\\ \\_\\ \\_\\"
         "  \\/_/ /_/ \\/_____/ \\/_/ \\/_/ " "\\/_/" "  \\/_____/ \\/_/\\/_/"
     )
-    printf "$PURPLE${TEXT[0]}$DARK_GRAY${TEXT[1]}$PURPLE${TEXT[2]}$NC\n"
-    printf "$PURPLE${TEXT[3]}$DARK_GRAY${TEXT[4]}$PURPLE${TEXT[5]}$NC\n"
-    printf "$PURPLE${TEXT[6]}$DARK_GRAY${TEXT[7]}$PURPLE${TEXT[8]}$NC\n"
-    printf "$PURPLE${TEXT[9]}$DARK_GRAY${TEXT[10]}$PURPLE${TEXT[11]}$NC\n"
-    printf "$PURPLE${TEXT[12]}$DARK_GRAY${TEXT[13]}$PURPLE${TEXT[14]} ${DARK_GRAY}v${_VERSION}$NC\n"
+    printf "$PURPLE%s$DARK_GRAY%s$PURPLE%s$NC\n" "${TEXT[0]}" "${TEXT[1]}" "${TEXT[2]}"
+    printf "$PURPLE%s$DARK_GRAY%s$PURPLE%s$NC\n" "${TEXT[3]}" "${TEXT[4]}" "${TEXT[5]}"
+    printf "$PURPLE%s$DARK_GRAY%s$PURPLE%s$NC\n" "${TEXT[6]}" "${TEXT[7]}" "${TEXT[8]}"
+    printf "$PURPLE%s$DARK_GRAY%s$PURPLE%s$NC\n" "${TEXT[9]}" "${TEXT[10]}" "${TEXT[11]}"
+    printf "$PURPLE%s$DARK_GRAY%s$PURPLE%s ${DARK_GRAY}v%s$NC\n" "${TEXT[12]}" "${TEXT[13]}" "${TEXT[14]}" "${_VERSION}"
     printf "\n"
 }
 
 function info() {
-    printf "PROJECT_NAME        : $GREEN${PROJECT_NAME}$NC  # project name (name of the project folder)\n"
-    printf "RELATIVE_PATH_PARTS : $GREEN${RELATIVE_PATH_PARTS[*]}$NC  # relative path of the current file split into an array\n"
-    printf "DEPTH               : $GREEN${DEPTH}$NC  # depth of the current file (number of folders deep)\n"
-    printf "FILENAME            : $GREEN${FILENAME}$NC  # just the filename (equivalent to RELATIVE_PATH_PARTS[DEPTH])\n"
-    printf "EXTENSION           : $GREEN${EXTENSION}$NC  # just the extension of the current file\n"
-    printf "ROOT_FOLDER         : $GREEN${ROOT_FOLDER}$NC  # full path to the root folder of the project\n"
-    printf "FULL_FILE_PATH      : $GREEN${FULL_FILE_PATH}$NC  # full path of the current file\n"
+    printf "PROJECT_NAME        : $GREEN%s$NC  # project name (name of the project folder)\n" "$PROJECT_NAME"
+    printf "RELATIVE_PATH_PARTS : $GREEN%s$NC  # relative path of the current file split into an array\n" "${RELATIVE_PATH_PARTS[*]}"
+    printf "DEPTH               : $GREEN%s$NC  # depth of the current file (number of folders deep)\n" "${DEPTH}"
+    printf "FILENAME            : $GREEN%s$NC  # just the filename (equivalent to RELATIVE_PATH_PARTS[DEPTH])\n" "${FILENAME}"
+    printf "EXTENSION           : $GREEN%s$NC  # just the extension of the current file\n" "${EXTENSION}"
+    printf "ROOT_FOLDER         : $GREEN%s$NC  # full path to the root folder of the project\n" "${ROOT_FOLDER}"
+    printf "FULL_FILE_PATH      : $GREEN%s$NC  # full path of the current file\n" "${FULL_FILE_PATH}"
 }
 
-# VERBOSE=true
-VERBOSE=false
-[ "${RELATIVE_PATH_PARTS[0]}" = ".vscode" ] && [ ${RELATIVE_PATH_PARTS[$DEPTH]} = "run.sh" ] && [ $DEPTH -eq 1 ] && VERBOSE=true
+VERBOSE=true
+# VERBOSE=false
+[ "${RELATIVE_PATH_PARTS[0]}" = ".vscode" ] && [ "${RELATIVE_PATH_PARTS[$DEPTH]}" = "run.sh" ] && [ $DEPTH -eq 1 ] && VERBOSE=true
 if $VERBOSE; then
     logo
     info
     exit 0
 fi
 
+function fatal() { printf "${RED}%s${NC}\n" "$1"; exit 1; }
+
+################################################################################
 ################################################################################
 
 # Do some other stuff here.
@@ -85,9 +88,10 @@ fi
 _EXAMPLE_PYTEST=false
 if [ "$_EXAMPLE_PYTEST" = true ]; then
     # Run the test if you're currently editing a python test file
-    if [ $EXTENSION = "py" ] && [ ${RELATIVE_PATH_PARTS[0]} = "tests" ]; then
-        printf "Running tests for $FILENAME\n"
-        pytest -s -x -k ${FILENAME%.*}
+    if [ "$EXTENSION" = "py" ] && [ "${RELATIVE_PATH_PARTS[0]}" = "tests" ]; then
+        command -v pytest &>/dev/null || fatal "pytest could not be found, please install it!"
+        printf "Running pytest for %s\n" "$FILENAME"
+        pytest -s -x -k "${FILENAME%.*}"
         exit 0
     fi
 fi
@@ -102,22 +106,24 @@ if [ "$_EXAMPLE_CMAKE" = true ]; then
         # If the build folder doesn't exist, create it and run cmake
         (
             mkdir "$ROOT_FOLDER/build"
-            cd "$ROOT_FOLDER/build"
+            cd "$ROOT_FOLDER/build" || fatal "Could not cd to build folder"
             cmake ..
         )
     fi
 
     make --directory="$ROOT_FOLDER/build/"; OUT=$?;
     if [ $OUT == 0 ]; then
-        printf "Running $TARGET\n";
+        printf "Running %s\n" "$TARGET"
         "$ROOT_FOLDER/build/$TARGET"; OUT=$?;
         if [ $OUT == 0 ]; then
-            printf "Success!\n";
+            # shellcheck disable=SC2059
+            printf "${GREEN}Success!${NC}\n";
         else
-            printf "$TARGET failed with $OUT\n";
+            printf "${RED}%s failed with %s${NC}\n" "$TARGET" "$OUT";
         fi
     else
-        printf "make failed with $OUT\n";
+        # spellchecker: ignore smake
+        printf "${RED}make failed with %s${NC}\n" "$OUT";
         printf "maybe delete the content of the build folder, rerun cmake and try again?\n";
     fi
     exit $OUT
@@ -127,4 +133,4 @@ fi
 
 # Got to the end of the script. I guess there's nothing to do.
 
-printf "Nothing to do for $GREEN${FULL_FILE_PATH}$NC\n"
+printf "Nothing to do for ${GREEN}%s${NC}\n" "$FULL_FILE_PATH"
