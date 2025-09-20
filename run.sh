@@ -62,8 +62,8 @@ function info() {
     printf "FULL_FILE_PATH      : $GREEN%s$NC  # full path of the current file\n" "${FULL_FILE_PATH}"
 }
 
-VERBOSE=true
-# VERBOSE=false
+# VERBOSE=true
+VERBOSE=false
 [ "${RELATIVE_PATH_PARTS[0]}" = ".vscode" ] && [ "${RELATIVE_PATH_PARTS[$DEPTH]}" = "run.sh" ] && [ $DEPTH -eq 1 ] && VERBOSE=true
 if $VERBOSE; then
     logo
